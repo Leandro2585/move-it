@@ -1,63 +1,44 @@
-import Head from 'next/head';
-import { GetServerSideProps } from 'next';
-import Profile from '../components/Profile';
-import Countdown from '../components/Countdow';
-import ChallengeBox from '../components/ChallengeBox';
-import ExperienceBar from '../components/ExperienceBar';
-import CompletedChallenges from '../components/CompletedChallenges';
-import {
-  Section,
-  Container,
-  CounterContainer,
-  ChallengeContainer
-} from '../styles/pages/Home';
-import { ChallengesProvider } from '../hooks/ChallengesContext';
-import { ChallengesProvider } from '../hooks/CountdownContext';
+import { useState, useContext } from 'react';
+import { Container } from '../styles/pages/Landing';
+import { InputContainer } from '../styles/components/Input';
+import Link from 'next/link';
+import Cookie from 'js-cookie';
+import axios from 'axios';
 
-interface HomeProps {
-  level: number;
-  currentExperience: number;
-  challengesCompleted: number;
-}
+export default function Landing() {
+  const [username, setUsername] = useState();
 
-export default function Home(props: HomeProps) {
-  return (
-    <ChallengesProvider
-      level={props.level}
-      currentExperience={props.currentExperience}
-      challengesCompleted={props.challengesCompleted}
-    >
-      <Container>
-        <Head>
-          <title>Início | move.it</title>
-        </Head>
-        <ExperienceBar/>
-        <CountdownProvider>
-          <Section>
-            <CounterContainer>
-              <Profile/>
-              <CompletedChallenges/>
-              <Countdown/>
-            </CounterContainer>
-            <ChallengeContainer>
-              <ChallengeBox/>
-            </ChallengeContainer>
-          </Section>
-        </CountdownProvider>
-
-      </Container>
-    </ChallengesProvider>
-  );
-}
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { level, currentExperience, challengesCompleted } = ctx.req.cookies;
-
-  return {
-    props: {
-      level: Number(level),
-      currentExperience: Number(currentExperience),
-      challengesCompleted: Number(challengesCompleted)
-    }
+  async function signIn(username_string){
+    await axios.get(`https://api.github.com/users/${username_string}`)
+      .then(response => {
+        const { id, name, avatar_url } = response.data;
+        Cookie.set('id', id);
+        Cookie.set('name', name);
+        Cookie.set('avatar_url', avatar_url);
+      });
   }
+
+  return(
+    <Container>
+      <img src="/background.svg" alt="background"/>
+      <div>
+        <img src="/logo-white.svg" alt="Move It"/>
+
+        <h1>Bem-vindo</h1>
+
+        <span>
+          <img src="/icons/github.svg" alt="GitHub"/>
+          <p>Faça login com seu GitHub para começar</p>
+        </span>
+        <InputContainer>
+          <input placeholder="Digite seu username" type="text" onChange={(e) => setUsername(e.target.value)}/>
+          <button type="button" onClick={() => signIn(username)}>
+            <Link href="/home">
+              <img src="/icons/arrow-left.svg"/>
+            </Link>
+          </button>
+        </InputContainer>
+      </div>
+    </Container>
+  );
 }

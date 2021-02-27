@@ -29,11 +29,11 @@ export const Container = styled.div`
   }
   strong {
     font-size: 2.25rem;
-    color: ${({ theme }) => theme.colors.title};
+    color: #2E384D;
   }
   p {
     font-size: 1.25rem;
-    color: ${({ theme }) => theme.colors.text};
+    color: #2E3236;
     margin-top: 0.25rem;
   }
   button {

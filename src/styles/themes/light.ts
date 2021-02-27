@@ -7,7 +7,7 @@ const light = {
     grayLine: '#CCC',
     text: '#2E3236',
     textHighlight: '#B3B9FF',
-    navBar: '#2E384D',
+    navBar: '#FBFBFB',
     title: '#2E384D',
     red: '#E83F5B',
     green: '#4CD62B',

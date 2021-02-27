@@ -32,7 +32,7 @@ interface ChallengesContextData {
   levelUp(): void;
   resetChallenge(): void;
   completeChallenge(): void;
-  startNewChallenge(): void;;
+  startNewChallenge(): void;
   closeLevelUpModal(): void;
 }
 
@@ -51,9 +51,9 @@ function ChallengesProvider({ children, ...rest }: ChallengesProviderProps) {
   }, []);
 
   useEffect(() => {
-    Cookies.set('level', String(level);
-    Cookies.set('currentExperience', String(currentExperience);
-    Cookies.set('challengesCompleted', String(challengesCompleted);
+    Cookies.set('level', String(level));
+    Cookies.set('currentExperience', String(currentExperience));
+    Cookies.set('challengesCompleted', String(challengesCompleted));
   }, [level, currentExperience, challengesCompleted]);
 
   function levelUp() {

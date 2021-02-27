@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Header = styled.header`
   height: 100%;
-  width: 4.5rem;
+  width: 5rem;
   position: absolute;
   background: ${({ theme }) => theme.colors.navBar};
   display: grid;
@@ -26,15 +26,17 @@ export const Header = styled.header`
         content: '';
         position: absolute;
         left: 0;
-        height: 32px;
+        height: 38px;
         width: 4px;
         background: ${({ theme }) => theme.colors.blue};
         border-radius: 0 6px 6px 0;
       }
+      &:hover svg{
+        color: ${({ theme }) => theme.colors.blue};
+      }
     }
     svg {
-
-      color: ${({ theme }) => theme.colors.blue};
+      color: #999;
     }
   }
 `;

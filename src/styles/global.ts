@@ -21,11 +21,11 @@ body {
   color: ${({ theme }) => theme.colors.text};
 }
 body, input, textarea, button {
+  outline: 0;
   font: 400 1rem "Inter", sans-serif;
 }
 button {
   cursor: pointer;
-  outline: 0;
 }
 a {
   color: inherit;

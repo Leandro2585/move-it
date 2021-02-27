@@ -4,8 +4,9 @@ import { ThemeProvider } from './ThemeContext';
 const AppProvider: React.FC = ({ children }) => {
   return(
       <ThemeProvider>
-          {children}
+        {children}
       </ThemeProvider>
   );
 }
+
 export default AppProvider;

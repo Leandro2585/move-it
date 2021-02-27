@@ -5,15 +5,20 @@ import {
 } from '../styles/components/Profile';
 import { useChallenges } from '../hooks/ChallengesContext';
 
-export default function Profile() {
+interface ProfileProps {
+  id: number;
+  name: string;
+  avatar_url: string;
+}
 
-  const { level, levelUp } = useChallenges();
+export default function Profile({ id, name, avatar_url }: ProfileProps) {
+  const { level } = useChallenges();
 
   return(
     <Container>
-      <Avatar onClick={levelUp} src="https://github.com/Leandro2585.png" alt="Leandro Real"/>
+      <Avatar src={avatar_url} alt={name}/>
       <ProfileData>
-        <strong>Leandro Real</strong>
+        <strong>{name}</strong>
         <p>
           <img src="icons/level.svg" alt="Level"/>
           Level { level }
